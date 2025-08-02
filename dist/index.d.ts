@@ -20,3 +20,4 @@ declare class HarmonyCrypto {
     kyber1024_decapsulate(ciphertext: Uint8Array, shared_secret: Uint8Array): Promise<Uint8Array>;
 }
 export default HarmonyCrypto;
+//# sourceMappingURL=index.d.ts.map
