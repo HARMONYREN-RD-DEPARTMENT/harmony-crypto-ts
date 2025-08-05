@@ -18,8 +18,6 @@ export class Kyber {
   constructor(algo: KyberAlgorithm, seed: Uint8Array) {
     this.ctx = new kyber_algorithms[algo]();
     this.seed = seed;
-
-    console.log(seed);
   }
 
   async get_keypair(): Promise<{ public_key: Uint8Array, secret_key: Uint8Array }> {
