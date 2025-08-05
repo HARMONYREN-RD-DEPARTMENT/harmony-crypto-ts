@@ -13,7 +13,6 @@ class Kyber {
     constructor(algo, seed) {
         this.ctx = new kyber_algorithms[algo]();
         this.seed = seed;
-        console.log(seed);
     }
     async get_keypair() {
         let keypair = await this.ctx.deriveKeyPair(this.seed);
