@@ -3,7 +3,7 @@ import * as sha2 from '@noble/hashes/sha2';
 
 import { Buffer } from 'buffer';
 
-const hashing_functions = {
+export const hashing_functions = {
   // SHA2
   sha2_256: sha2.sha256,
   sha2_512: sha2.sha512,

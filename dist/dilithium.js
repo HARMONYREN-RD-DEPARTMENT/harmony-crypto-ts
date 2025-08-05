@@ -13,20 +13,22 @@ const dilithium_algorithms = {
 };
 class Dilithium {
     ctx;
-    constructor(ctx) {
+    seed;
+    constructor(ctx, seed) {
         this.ctx = ctx;
+        this.seed = seed;
     }
-    get_keypair(algo, seed) {
-        let keypair = this.ctx.generateKeys(dilithium_algorithms[algo], seed);
+    get_keypair(algo) {
+        let keypair = this.ctx.generateKeys(dilithium_algorithms[algo], this.seed);
         return { public_key: keypair.publicKey, secret_key: keypair.privateKey };
     }
-    get_keypair_hex(algo, seed) {
-        let keypair = this.get_keypair(algo, seed);
+    get_keypair_hex(algo) {
+        let keypair = this.get_keypair(algo);
         if (keypair.public_key === undefined) {
-            throw new Error(`Public key is null`);
+            throw new Error(`Public key is undefined`);
         }
         if (keypair.secret_key === undefined) {
-            throw new Error(`Secret key is null`);
+            throw new Error(`Secret key is undefined`);
         }
         return {
             public_key: Buffer.from(keypair.public_key).toString("hex"),

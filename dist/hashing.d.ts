@@ -1,4 +1,4 @@
-declare const hashing_functions: {
+export declare const hashing_functions: {
     readonly sha2_256: {
         (msg: import("@noble/hashes/utils").Input): Uint8Array;
         outputLen: number;

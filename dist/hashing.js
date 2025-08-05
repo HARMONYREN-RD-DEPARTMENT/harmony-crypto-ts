@@ -33,11 +33,11 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Hashing = void 0;
+exports.Hashing = exports.hashing_functions = void 0;
 const sha3 = __importStar(require("@noble/hashes/sha3"));
 const sha2 = __importStar(require("@noble/hashes/sha2"));
 const buffer_1 = require("buffer");
-const hashing_functions = {
+exports.hashing_functions = {
     // SHA2
     sha2_256: sha2.sha256,
     sha2_512: sha2.sha512,
@@ -51,7 +51,7 @@ const hashing_functions = {
 exports.Hashing = {
     hash(data, algo) {
         const encoder = new TextEncoder();
-        return hashing_functions[algo](encoder.encode(data));
+        return exports.hashing_functions[algo](encoder.encode(data));
     },
     hash_hex(data, algo) {
         return buffer_1.Buffer.from(this.hash(data, algo)).toString("hex");

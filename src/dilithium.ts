@@ -10,25 +10,27 @@ type DilithiumAlgorithm = keyof typeof dilithium_algorithms;
 
 class Dilithium {
   ctx: Awaited<typeof dilithiumModulePromise>;
+  seed: Uint8Array;
 
-  constructor(ctx: Awaited<typeof dilithiumModulePromise>) {
+  constructor(ctx: Awaited<typeof dilithiumModulePromise>, seed: Uint8Array) {
     this.ctx = ctx;
+    this.seed = seed;
   }
 
-  get_keypair(algo: DilithiumAlgorithm, seed: Uint8Array) {
-    let keypair = this.ctx.generateKeys(dilithium_algorithms[algo], seed);
+  get_keypair(algo: DilithiumAlgorithm) {
+    let keypair = this.ctx.generateKeys(dilithium_algorithms[algo], this.seed);
     return { public_key: keypair.publicKey, secret_key: keypair.privateKey };
   }
 
-  get_keypair_hex(algo: DilithiumAlgorithm, seed: Uint8Array): { public_key: string; secret_key: string; } {
-    let keypair = this.get_keypair(algo, seed);
+  get_keypair_hex(algo: DilithiumAlgorithm): { public_key: string; secret_key: string; } {
+    let keypair = this.get_keypair(algo);
 
     if (keypair.public_key === undefined) {
-      throw new Error(`Public key is null`);
+      throw new Error(`Public key is undefined`);
     }
 
     if (keypair.secret_key === undefined) {
-      throw new Error(`Secret key is null`);
+      throw new Error(`Secret key is undefined`);
     }
 
     return {

@@ -7,12 +7,13 @@ declare const dilithium_algorithms: {
 type DilithiumAlgorithm = keyof typeof dilithium_algorithms;
 declare class Dilithium {
     ctx: Awaited<typeof dilithiumModulePromise>;
-    constructor(ctx: Awaited<typeof dilithiumModulePromise>);
-    get_keypair(algo: DilithiumAlgorithm, seed: Uint8Array): {
+    seed: Uint8Array;
+    constructor(ctx: Awaited<typeof dilithiumModulePromise>, seed: Uint8Array);
+    get_keypair(algo: DilithiumAlgorithm): {
         public_key: Uint8Array<ArrayBufferLike> | undefined;
         secret_key: Uint8Array<ArrayBufferLike> | undefined;
     };
-    get_keypair_hex(algo: DilithiumAlgorithm, seed: Uint8Array): {
+    get_keypair_hex(algo: DilithiumAlgorithm): {
         public_key: string;
         secret_key: string;
     };
